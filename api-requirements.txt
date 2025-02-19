@@ -1,0 +1,67 @@
+	Black Box Administration Panel (API)
+
+======= USERS =======
+
+	User schema
+
+- id (string)
+- userName (string)
+- password (string)
+- isAdmin (false by default, only changes in the database)
+- role ("admin" | "employee")
+
+
+	1. User registration
+
+- Only 2 fields are required (username, password)
+- If the username exists, send an error
+- If the username doesn't exist, add username and admin's password ("admin" role) to validate the registration
+- Save data in the database (role by default will be "employee")
+
+
+	2. User Login
+
+- Validate fields (username, password)
+- Implement authentication token (JWT, OAuth, etc.)
+
+
+	3. Edit account
+
+- User with "employee" role:
+  - Change password or username (admin's username and password or admin's password ("admin" role) are required to validate the changes)
+- User with "admin" role:
+  - Change password or username (admin's data not necessary)
+
+
+	4. User management (role assignment, delete users)
+
+- Create an endpoint to show all users
+- User with "admin" role:
+  - Can change the "employee" role to "admin" role of any user
+  - Can't change the role of any user with "admin" role
+- "Admin" role user can delete any user with "employee" role only
+- The admin (isAdmin) can delete any user with both roles
+
+
+============ PRODUCTS =========
+
+	Products schema
+
+- id (string)
+- name (string)
+- color (string)
+- quantity (string / number)
+- pricing (string)
+- description (string)
+- brand (string)
+- smallImg (string)
+- images (string array)
+- idComments (string array, NOTE: in this case i don't know how to handle this one)
+- rating (I don't know how to handle this one too)
+
+
+	Management products
+
+- Any user can create and update products
+- Create an endpoint to show all products
+- user with "admin" role can delete products
